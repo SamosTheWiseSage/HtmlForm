@@ -31,32 +31,38 @@ public class HomeServlets extends HttpServlet {
                 "               border-radius: 12px; justify-content: center;\n" +
                 "            display: flex;\n" +
                 "            gap: 30px;'>\n" +
-                "            <a href=\"/\"style=\"border: 1px solid black; background-color: #96D4D4;  padding: 50px;\n" +
+                "            <a href=\"/MainBase\" style=\"border: 1px solid black; background-color: #96D4D4;  padding: 50px;\n" +
                 "                width: auto;\n" +
-                "                margin-left: 5%;\n" +
+                "                margin-left:auto;\n" +
                 "                margin-right: auto;\n" +
-                "                border: 50px;\n" +
+                "                border: auto;\n" +
                 "                border-radius: 50px; \">HOME</a>\n" +
                 "            <a href=\"/personchooser\" style=\"border: 1px solid black; background-color: #96D4D4;  padding: 50px;\n" +
                 "                width: auto;\n" +
-                "                margin-left: 5%;\n" +
+                "                margin-left: auto;\n" +
                 "                margin-right: auto;\n" +
-                "                border: 50px;\n" +
+                "                border: auto;\n" +
                 "                border-radius: 50px; \">Show Person Classes</a>\n" +
-                "            <a href=\"/MainBase\" style=\"border: 1px solid black; background-color: #96D4D4;  padding: 50px;\n" +
-                "                width: auto;\n" +
-                "                margin-left: 5%;\n" +
-                "                margin-right: auto;\n" +
-                "                border: 50px;\n" +
-                "                border-radius: 50px; \">Servlet Redirect</a>\n" +
                 "   <a href=\"/UpdateDb\" style=\"border: 1px solid black; background-color: #96D4D4;  padding: 50px;\n" +
                 "                width: auto;\n" +
-                "                margin-left: 5%;\n" +
+                "                margin-left: auto;\n" +
                 "                margin-right: auto;\n" +
-                "                border: 50px;\n" +
+                "                border: auto;\n" +
                 "                border-radius: 50px; \">UpdateDb</a>"+
+                "            <a href=\"/UpdateDbKurs\" style=\"border: 1px solid black; background-color: #96D4D4;  padding: 50px;\n" +
+                "                width: auto;\n" +
+                "                margin-left: auto;\n" +
+                "                margin-right: auto;\n" +
+                "                border: auto;\n" +
+                "                border-radius: 50px; \">UpdateDbKurs</a>\n" +
+                "            <a href=\"/InsertDbAssociation\" style=\"border: 1px solid black; background-color: #96D4D4;  padding: 50px;\n" +
+                "                width: auto;\n" +
+                "                margin-left: auto;\n" +
+                "                margin-right: auto;\n" +
+                "                border: auto;\n" +
+                "                border-radius: 50px; \">InsertDbAssociation</a>\n" +
                 "        </nav>"
-                + "<h2>Hello from Java Servlet!</h2>";
+                + "<h2>Hello this is the homepage where you can navigate to any webpage on the site.</h2>";
         String bottom =
                 "</body>"
                         + "</html>";
