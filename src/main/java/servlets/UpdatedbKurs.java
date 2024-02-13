@@ -89,18 +89,21 @@ public class UpdatedbKurs extends HttpServlet {
                 "                border: auto;\n" +
                 "                border-radius: 50px; \">InsertDbAssociation</a>\n" +
                 "        </nav>"
-                + "<h2>Welcome. this is where you can insert another entry into the UpdatedKurs table. </h2>";
+                + "<h2>Welcome. this is where you can insert another entry into the UpdatedKurs table. </h2>" +
+                "<table>";
+        out.println(top);
         ResultSet rs2 = stmt.executeQuery("Select id,namn,YHP from Kurser");
         while (rs2.next()){
             //print to console column 1 and 2
-            middle2 = "<table>"+
-                    "<th style='border: 1px solid black; background-color: #96D4D4;'>" +
-                    " Kurs id:" + rs2.getString("id") + ": kurs namn:" +rs2.getString("namn") +": YHP Points:"+ rs2.getString("YHP")+"<br>" +"</th></table>";
+            middle2 =
+                    "<tr style='border: 1px solid black; background-color: #96D4D4;'>" +
+                    "<td> Kurs id:" + rs2.getString("id") + "</td><td> kurs namn:" +rs2.getString("namn") +"</td><td> YHP Points:"+ rs2.getString("YHP")+"</td></tr>";
             out.println(middle2);
         }
         resp.setContentType("text/HTML");
+String bottom = "</table>";
+out.println(bottom);
 
-        out.println(top);
 
         //out.println(bottom);
     }
@@ -168,7 +171,7 @@ public class UpdatedbKurs extends HttpServlet {
                         + "            <label for=namn>Name of the kurs:</label>"
                         + "            <input type=text required=true id=namn name=namn><br><br>"
                         + "             <label for=YHP>YHP:</label><br>"
-                        + "            <input type=text required=true id=YHP name=YHP><br><br>"
+                        + "            <input type=number required=true id=YHP name=YHP><br><br>"
                         +               "<label for=beskrivning>beskrivning:</label> "
                         +           "<input type=text id=beskrivning name=beskrivning><br><br>"
                         + "            <input type=submit value=Submit>"

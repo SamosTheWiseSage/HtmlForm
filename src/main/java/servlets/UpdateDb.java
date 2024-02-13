@@ -147,19 +147,22 @@ private String hobby;
                 "                border: auto;\n" +
                 "                border-radius: 50px; \">InsertDbAssociation</a>\n" +
                 "        </nav>"
-                + "<h2>Hello this is where you can add in a student into the database. please make sure you fill out both first and last names in the fields below. Towns and hobby is optional</h2>";
+                + "<h2>Hello this is where you can add in a student into the database. please make sure you fill out both first and last names in the fields below. Towns and hobby is optional</h2>"+
+                "<table>";
+        out.println(top);
         ResultSet rs2 = stmt.executeQuery("Select * from Students");
         while (rs2.next()){
             //print to console column 1 and 2
-            String middle = "<table>"+
-                    "<th style='border: 1px solid black; background-color: #96D4D4;'>" +
-                    " Student id:" + rs2.getString("id") + " First Name:" +rs2.getString("Fname") +" : Last Name:"+ rs2.getString("lname") +" : Town:"+ rs2.getString("town")+" : Hobby:"+ rs2.getString("Hobby")+"<br>" +"</th></table>";
+            String middle =
+                    "<tr style='border: 1px solid black; background-color: #96D4D4;'>" +
+                    " <td>Student id:" + rs2.getString("id") + "</td><td> First Name:" +rs2.getString("Fname") +" </td><td> Last Name:"+ rs2.getString("lname") +"</td><td> Town:"+ rs2.getString("town")+"</td> <td>Hobby:"+ rs2.getString("Hobby")+"</td></tr>";
             out.println(middle);
             //System.out.println("GET REQUEST");
         }
         resp.setContentType("text/HTML");
+        String bottom = "</table>";
+        out.println(bottom);
 
-        out.println(top);
     }
     private void showForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();

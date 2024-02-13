@@ -18,7 +18,7 @@ public class InsertDbAssociation extends HttpServlet {
         try {
             InsertSqlText(req, resp);
         } catch (SQLException e) {
-            String Warning = "<p> You have typed in the wrong StudentID or KursID please press reset and try again</p>";
+            String Warning = "<p style='border: 1px solid black; background-color: #96D4D4;'> You have typed in the wrong StudentID or KursID please press reset and try again</p>";
             PrintWriter out = resp.getWriter();
             out.println(Warning);
             //throw new RuntimeException(e);
@@ -93,26 +93,26 @@ public class InsertDbAssociation extends HttpServlet {
                 "                border: auto;\n" +
                 "                border-radius: 50px; \">InsertDbAssociation</a>\n" +
                 "        </nav>"
-                + "<h2>Welcome. this is where you can insert another entry into the Associations table. </h2>";
-
+                + "<h2>Welcome. this is where you can insert another entry into the Associations table. </h2>" +
+                "<table>";
+        out.println(top);
         ResultSet rs3 = stmt.executeQuery("Select * from Students");
         while (rs3.next()){
             //print to console column 1 and 2
-            middle3 = "<table>"+
-                    "<th style='border: 1px solid black; background-color: #96D4D4;'>" +
-                    "ID of Student:" + rs3.getString(1) + "<br> Student name:\n" +rs3.getString(2) +"<br> Student Last Name:\n "+ rs3.getString(3) +"<br> Town: "+ rs3.getString(4)+"<br>" +"</th></table>";
+            middle3 = "<tr style='border: 1px solid black; background-color: #96D4D4;'>" +
+                    "<td>ID of Student:" + rs3.getString(1) + "</td><td> Student name:\n" +rs3.getString(2) +"</td><td> Student Last Name:\n "+ rs3.getString(3) +"</td><td> Town: "+ rs3.getString(4)+"</td></tr>";
             out.print(middle3);
         }ResultSet rs2 = stmt.executeQuery("Select * from Kurser ");
         while (rs2.next()){
             //print to console column 1 and 2
-            middle2 = "<table>"+
-                    "<th style='border: 1px solid black; background-color: #96D4D4;'>" +
-                    " Kurs ID:" + rs2.getString(1) + "<br> Kurs name: " +rs2.getString(2) +"<br> Kurs last name: "+ rs2.getString(3) +"<br>" +"</th></table>";
+            middle2 = "<tr style='border: 1px solid black; background-color: #96D4D4;'>" +
+                    " <td>Kurs ID:" + rs2.getString(1) + "</td> <td>Kurs name: " +rs2.getString(2) +"</td><td> Kurs last name: "+ rs2.getString(3) +"</td></tr>";
             out.println(middle2);
         }
         resp.setContentType("text/HTML");
+String bottom = "</table>";
+        out.println(bottom);
 
-        out.println(top);
 
         //out.println(bottom);
     }

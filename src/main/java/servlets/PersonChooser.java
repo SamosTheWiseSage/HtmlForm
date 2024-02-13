@@ -24,8 +24,11 @@ private String middle2;
         try {
             DisplayUserSql(req, resp);
         } catch (SQLException e) {
+            System.out.println("jojojo");
             throw new RuntimeException(e);
+
         } catch (ClassNotFoundException e) {
+            System.out.println("kilujfiejfnerijnfirj");
             throw new RuntimeException(e);
         }
         showForm(req, resp);
@@ -96,18 +99,18 @@ private String middle2;
                 "                border: auto;\n" +
                 "                border-radius: 50px; \">InsertDbAssociation</a>\n" +
                 "        </nav>"
-                + "<h2>Welcome. this is where you can search out any individual student and get their full school data in one row. including their name, courses and the YHP of said courses </h2>";
+                + "<h2>Welcome. this is where you can search out any individual student and get their full school data in one row. including their name, courses and the YHP of said courses </h2><table>";  out.println(top);
         ResultSet rs2 = stmt.executeQuery("Select students.id,Fname,Lname,namn from Students join Associationstabellen on students.id = Associationstabellen.StudentID  Join kurser on kurser.id = Associationstabellen.KursID order by students.id asc");
         while (rs2.next()){
             //print to console column 1 and 2
-            middle2 = "<table>"+
-                    "<th style='border: 1px solid black; background-color: #96D4D4;'>" +
-                    " " + rs2.getString(1) + " " +rs2.getString(2) +" "+ rs2.getString(3) +" "+ rs2.getString(4)+"<br>" +"</th></table>";
+            middle2 = "<tr style='border: 1px solid black; background-color: #96D4D4;'>" +
+                    "<td> Student id" + rs2.getString(1) + "</td><td> First Name " +rs2.getString(2) +"</td><td> Last name "+ rs2.getString(3) +"</td><td> Kurs Name "+ rs2.getString(4)+"</td></tr>";
             out.println(middle2);
         }
         resp.setContentType("text/HTML");
+String bottom ="</table>";
+out.println(bottom);
 
-        out.println(top);
 
         //out.println(bottom);
     }
@@ -122,20 +125,21 @@ private String middle2;
         lname = req.getParameter("lname");
         StudentID = req.getParameter("StudentID");
 
-        ResultSet rs = stmt.executeQuery("select * from students st inner join Associationstabellen on st.id = Associationstabellen.StudentID inner Join kurser on kurser.id = Associationstabellen.KursID where StudentID='"+StudentID +"' OR Fname='" +fname+ "' AND Lname='"+lname+"'");
+
         String top = "<head><title>Hello " + req.getParameter("name") +  "</title></head>"
                 + "<body>"
                 +" <nav style='box-sizing: border-box; text-decoration: none;\n" +
                 "               font-size: 188%;\n" +
                 "               font-weight:lighter;\n" +
+                "               color:gold;\n" +
                 "               display: inline-block;\n" +
                 "               border: 3px solid black;\n" +
                 "               border-radius: 12px; justify-content: center;\n" +
                 "            display: flex;\n" +
                 "            gap: 30px;'>\n" +
-                "            <a href=\"/\"style=\"border: 1px solid black; background-color: #96D4D4;  padding: 50px;\n" +
+                "            <a href=\"/MainBase\" style=\"border: 1px solid black; background-color: #96D4D4;  padding: 50px;\n" +
                 "                width: auto;\n" +
-                "                margin-left: auto;\n" +
+                "                margin-left:auto;\n" +
                 "                margin-right: auto;\n" +
                 "                border: auto;\n" +
                 "                border-radius: 50px; \">HOME</a>\n" +
@@ -145,38 +149,60 @@ private String middle2;
                 "                margin-right: auto;\n" +
                 "                border: auto;\n" +
                 "                border-radius: 50px; \">Show Person Classes</a>\n" +
-                "            <a href=\"/MainBase\" style=\"border: 1px solid black; background-color: #96D4D4;  padding: 50px;\n" +
-                "                width: auto;\n" +
-                "                margin-left: auto;\n" +
-                "                margin-right: auto;\n" +
-                "                border: auto;\n" +
-                "                border-radius: 50px; \">Servlet Redirect</a>\n" +
                 "   <a href=\"/UpdateDb\" style=\"border: 1px solid black; background-color: #96D4D4;  padding: 50px;\n" +
                 "                width: auto;\n" +
                 "                margin-left: auto;\n" +
                 "                margin-right: auto;\n" +
                 "                border: auto;\n" +
                 "                border-radius: 50px; \">UpdateDb</a>"+
-                "   <a href=\"/UpdateDbKurs\" style=\"border: 1px solid black; background-color: #96D4D4;  padding: 50px;\n" +
+                "            <a href=\"/UpdateDbKurs\" style=\"border: 1px solid black; background-color: #96D4D4;  padding: 50px;\n" +
                 "                width: auto;\n" +
-                "                margin-left:auto;\n" +
+                "                margin-left: auto;\n" +
                 "                margin-right: auto;\n" +
                 "                border: auto;\n" +
-                "                border-radius: 50px; \">UpdateDbKurs</a>"+
+                "                border-radius: 50px; \">UpdateDbKurs</a>\n" +
+                "            <a href=\"/InsertDbAssociation\" style=\"border: 1px solid black; background-color: #96D4D4;  padding: 50px;\n" +
+                "                width: auto;\n" +
+                "                margin-left: auto;\n" +
+                "                margin-right: auto;\n" +
+                "                border: auto;\n" +
+                "                border-radius: 50px; \">InsertDbAssociation</a>\n" +
                 "        </nav>"
-                + "<h2>Hello from Java Servlet!</h2>";
-
+                + "<h2>Hello from Java Servlet!</h2>" +
+                "<table>";
+        out.println(top);
+        ResultSet rs = stmt.executeQuery("select st.id,Fname,Lname,namn from students st inner join Associationstabellen on st.id = Associationstabellen.StudentID inner Join kurser on kurser.id = Associationstabellen.KursID where StudentID='" + StudentID + "' and Fname='" + fname + "' AND Lname='" + lname + "'");
         while (rs.next()){
             //print to console column 1 and 2
-            middle = "<table>"+
-                    "<th style='border: 1px solid black; background-color: #96D4D4;'>" +
-                    " " + rs.getString("Fname") + " " +rs.getString("Lname") + " "+ rs.getString("namn") +"<br>" +"</th></table>";
+            middle = "<tr style='border: 1px solid black; background-color: #96D4D4;'>" +
+                    "<td> id:" + rs.getString(1) + "</td><td> First name:" +rs.getString("Fname") + "</td><td> Last name:"+ rs.getString("Lname") + "</td><td> Kurs:"+rs.getString(4)+"<td></tr>";
             out.println(middle);
-            System.out.println("GET REQUEST");
+        }
+        if (StudentID.isEmpty() & rs.next()) {
+          rs = stmt.executeQuery("select st.id,Fname,Lname,namn from students st inner join Associationstabellen on st.id = Associationstabellen.StudentID inner Join kurser on kurser.id = Associationstabellen.KursID where StudentID='" + StudentID + "' OR Fname='" + fname + "' AND Lname='" + lname + "'");
+            while (rs.next()){
+                //print to console column 1 and 2
+                middle = "<tr style='border: 1px solid black; background-color: #96D4D4;'>" +
+                        "<td> id:" + rs.getString(1) + "</td><td> First name:" +rs.getString("Fname") + "</td><td> Last name:"+ rs.getString("Lname") + "</td><td> Kurs:"+rs.getString(4)+"</td></tr>";
+                out.println(middle);
+            }
+        } else if (fname.isEmpty() & lname.isEmpty() & rs.next()) {
+            rs = stmt.executeQuery("select st.id,Fname,Lname,namn from students st inner join Associationstabellen on st.id = Associationstabellen.StudentID inner Join kurser on kurser.id = Associationstabellen.KursID where StudentID='" + StudentID+ "'" );
+            while (rs.next()){
+                //print to console column 1 and 2
+                middle = "<tr style='border: 1px solid black; background-color: #96D4D4;'>" +
+                        "<td> id:" + rs.getString(1) + "</td><td>  First name:" +rs.getString("Fname") + "</td><td>  Last name:"+ rs.getString("Lname") + "</td><td>  Kurs:"+rs.getString(4)+"</td><td>";
+                out.println(middle);
+            }
+        }
+        else if (!rs.next()){
+            String Warning = "<p style='border: 1px solid black; background-color: #96D4D4;'> You have typed in the wrong StudentID or KursID please press reset and try again</p>";
+            out.println(Warning);
         }
         resp.setContentType("text/HTML");
+String bottom = "</table>";
+out.println(bottom);
 
-        out.println(top);
 
         //out.println(bottom);
     }
@@ -187,9 +213,9 @@ private String middle2;
                         + "<div style='border:black solid; width:200px; padding:5px display:block; margin-left:auto; margin-right:auto; margin-top:5px; margin-bottom:5px;'>"
                         + "<form style='margin:5px;' action=/personchooser method=POST>"
                         + "            <label for=fname>First Name:</label>"
-                        + "            <input type=text required=true id=fname name=fname><br><br>"
+                        + "            <input type=text id=fname name=fname><br><br>"
                         + "             <label for=lname>Last Name:</label>"
-                        + "            <input type=text required=true id=lname name=lname><br><br>"
+                        + "            <input type=text id=lname name=lname><br><br>"
                         +               "<label for=StudentID>StudentID:</label> "
                         +           "<input type=text id=StudentID name=StudentID><br><br>"
                         + "            <input type=submit value=Submit>"
